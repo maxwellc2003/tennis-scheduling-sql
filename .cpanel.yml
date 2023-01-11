@@ -18,6 +18,5 @@ deployment:
     - /bin/cp -R ./server/db $BACKEND
     - /bin/cp -R ./server/models $BACKEND
     - /bin/cp -R ./server/utils $BACKEND
-    - /bin/cp -R ./server/.env $BACKEND
     - /bin/cp -R ./server/package.json $BACKEND
     - /bin/cp -R ./server/server.js $BACKEND

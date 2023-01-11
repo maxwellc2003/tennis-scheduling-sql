@@ -1,3 +1,3 @@
-const routeLink = "http://tennisscheduling.com:8080"
+const routeLink = "https://tennisscheduling.com:8080"
 
 module.exports = routeLink;

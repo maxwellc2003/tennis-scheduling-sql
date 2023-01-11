@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import "../assets/css/signup.css";
 import "../assets/css/captcha.css";
 import randomText from "../hooks/randomText";
+import routeLink from "../hooks/route";
 
 const Signup = () => {
   // captcha
@@ -83,7 +84,7 @@ const Signup = () => {
       setLoading(true);
 
       try {
-        const response = await fetch("http://localhost:3001/api/users", {
+        const response = await fetch(routeLink + "/api/users", {
           method: "post",
           body: JSON.stringify({
             email,

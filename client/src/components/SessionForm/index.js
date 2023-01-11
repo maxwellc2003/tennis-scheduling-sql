@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import moment from "moment";
 
 import "../../assets/css/sessionform.css";
+import routeLink from "../../hooks/route";
 
 const EventForm = () => {
   const [formState, setFormState] = useState({
@@ -26,7 +27,7 @@ const EventForm = () => {
     const max = parseInt(formState.eventMax);
 
     try {
-      const response = await fetch("http://localhost:3001/api/events", {
+      const response = await fetch(routeLink + "/api/events", {
         method: "post",
         body: JSON.stringify({
           date,

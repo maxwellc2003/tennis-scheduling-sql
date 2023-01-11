@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import "../assets/css/calendar.css";
+import routeLink from "../hooks/route";
 
 import Login from "../components/Login";
 import PlayerCard from "../components/PlayerCard";
@@ -18,7 +19,7 @@ const Calendar = () => {
       setLoading(true);
 
       try {
-        const response = await fetch("http://localhost:3001/api/events");
+        const response = await fetch(routeLink + "/api/events");
         const parsedData = await response.json();
 
         setData(parsedData);

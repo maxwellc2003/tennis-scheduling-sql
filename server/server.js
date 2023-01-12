@@ -43,7 +43,6 @@ app.use(require("./controllers/"));
   console.log("Synced!");
 })();
 
-
 // app.listen(PORT, () => {
 //   console.log(`App listening on port ${PORT}!`);
 // });
@@ -55,5 +54,5 @@ const credentials = {key: privateKey, cert: certificate};
 
 const server = https.createServer(credentials, app);
 server.listen(PORT, () => {
-  console.log(`Https App listening on port ${PORT}!`);
+  console.log(`Https app listening on port ${PORT}!`);
 });

@@ -19,7 +19,7 @@ const Calendar = () => {
       setLoading(true);
 
       try {
-        const response = await fetch(routeLink + "/api/events");
+        const response = await fetch("http://tennisscheduling.com:8443/api/events");
         const parsedData = await response.json();
 
         setData(parsedData);

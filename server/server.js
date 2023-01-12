@@ -1,6 +1,8 @@
 const path = require("path");
 const express = require("express");
 const session = require("express-session");
+const https = require("https");
+const fs = require("fs");
 
 const cors = require("cors");
 
@@ -41,6 +43,17 @@ app.use(require("./controllers/"));
   console.log("Synced!");
 })();
 
-app.listen(PORT, () => {
-  console.log(`App listening on port ${PORT}!`);
+
+// app.listen(PORT, () => {
+//   console.log(`App listening on port ${PORT}!`);
+// });
+
+const privateKey = fs.readFileSync('/home/web3605/ssl/keys/cb106_320e5_ac5a05edca714e826328d4f08e7ab642.key');
+const certificate = fs.readFileSync('/home/web3605/ssl/certs/_wildcard__tennisscheduling_com_cb106_320e5_1680397638_c945f5c015e55e90ec0aaf063aa967f5.crt');
+
+const credentials = {key: privateKey, cert: certificate};
+
+const server = https.createServer(credentials, app);
+server.listen(PORT, () => {
+  console.log(`Https App listening on port ${PORT}!`);
 });

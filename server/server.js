@@ -5,7 +5,7 @@ const session = require("express-session");
 const cors = require("cors");
 
 const app = express();
-const PORT = process.env.PORT || 443;
+const PORT = process.env.PORT || 8443;
 
 const sequelize = require("./config/connection");
 const SequelizeStore = require("connect-session-sequelize")(session.Store);

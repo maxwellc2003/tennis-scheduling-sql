@@ -5,7 +5,7 @@ const session = require('express-session');
 const cors=require("cors");
 
 const app = express();
-const PORT = process.env.PORT || 8080 // 443 is used on apache;
+const PORT = process.env.PORT || 8443
 
 const sequelize = require("./config/connection");
 const SequelizeStore = require('connect-session-sequelize')(session.Store);

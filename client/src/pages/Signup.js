@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 
 import "../assets/css/signup.css";
 import "../assets/css/captcha.css";
-import randomText from "../hooks/randomText";
-import routeLink from "../hooks/route";
+import randomText from "../utils/randomText";
+import routeLink from "../utils/route";
 
 const Signup = () => {
   // captcha

@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 
 import "../assets/css/calendar.css";
-import routeLink from "../hooks/route";
+import routeLink from "../utils/route";
 
 import Login from "../components/Login";
 import PlayerCard from "../components/PlayerCard";
 import SessionForm from "../components/SessionForm";
 import CalendarEvents from "../components/CalendarEvents";
 
-import Auth from "../hooks/auth";
+import Auth from "../utils/auth";
 
 const Calendar = () => {
   const [data, setData] = useState(null);

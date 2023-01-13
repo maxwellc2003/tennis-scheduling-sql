@@ -12,7 +12,7 @@ router.get("/", (req, res) => {
       },
     ],
   })
-    .then((dbUserData) => res.json(dbUserData))
+    .then((dbEventData) => res.json(dbEventData))
     .catch((err) => {
       console.log(err);
       res.status(500).json(err);
@@ -25,12 +25,12 @@ router.get("/:id", (req, res) => {
       id: req.params.id,
     },
   })
-    .then((dbUserData) => {
-      if (!dbUserData) {
-        res.status(404).json({ message: "No product found with this id" });
+    .then((dbEventData) => {
+      if (!dbEventData) {
+        res.status(404).json({ message: "No event found with this id!" });
         return;
       }
-      res.json(dbUserData);
+      res.json(dbEventData);
     })
     .catch((err) => {
       console.log(err);
@@ -46,7 +46,26 @@ router.post("/", (req, res) => {
     min: req.body.min,
     max: req.body.max,
   })
-    .then((dbUserData) => res.json(dbUserData))
+    .then((dbEventData) => res.json(dbEventData))
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+});
+
+router.delete("/:id", (req, res) => {
+  Event.destroy({
+    where: {
+      id: req.params.id,
+    },
+  })
+    .then((dbEventData) => {
+      if (!dbEventData) {
+        res.status(404).json({ message: "No event found with this id!" });
+        return;
+      }
+      res.json(dbEventData);
+    })
     .catch((err) => {
       console.log(err);
       res.status(500).json(err);

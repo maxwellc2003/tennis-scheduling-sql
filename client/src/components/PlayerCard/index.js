@@ -1,13 +1,21 @@
-import React from "react";
-
-import Auth from "../../hooks/auth";
+import React, { useState } from "react";
 
 import "../../assets/css/playercard.css";
+
+import routeLink from "../../utils/route";
 
 const PlayerCard = () => {
   const logout = (event) => {
     event.preventDefault();
-    Auth.logout();
+
+    try {
+      fetch(routeLink + "/api/users/logout", {
+        method: "post",
+        headers: { "Content-Type": "application/json" },
+      });
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (
@@ -16,7 +24,12 @@ const PlayerCard = () => {
       <div className="border"></div>
       <h2>Welcome, Player!</h2>
       <div className="border"></div>
-      <button id="logout-button" className="button form-element" type="button" onClick={logout}>
+      <button
+        id="logout-button"
+        className="button form-element"
+        type="button"
+        onClick={logout}
+      >
         Logout
       </button>
     </div>

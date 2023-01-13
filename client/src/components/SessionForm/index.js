@@ -2,19 +2,21 @@ import React, { useState } from "react";
 import moment from "moment";
 
 import "../../assets/css/sessionform.css";
-import routeLink from "../../hooks/route";
+import routeLink from "../../utils/route";
 
 const EventForm = () => {
   const [formState, setFormState] = useState({
     month: "01",
     day: "01",
     eventLocation: "",
-    startTime: "4:00AM",
-    endTime: "4:00AM",
+    startTime: "4:00A",
+    endTime: "4:00A",
+    eventMin: "01",
     eventMax: "01",
   });
 
   const [error, setError] = useState(false);
+  const [success, setsuccess] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -24,25 +26,30 @@ const EventForm = () => {
     const date = formState.month + "/" + formState.day + "/" + year;
     const time = formState.startTime + "-" + formState.endTime;
     const location = formState.eventLocation;
+    const min = parseInt(formState.eventMin);
     const max = parseInt(formState.eventMax);
 
-    try {
-      const response = await fetch(routeLink + "/api/events", {
-        method: "post",
-        body: JSON.stringify({
-          date,
-          time,
-          location,
-          max,
-        }),
-        headers: { "Content-Type": "application/json" },
-      });
-      if (response.ok) {
-        console.log("Event Added Successfully");
+    if (location != "") {
+      try {
+        const response = await fetch(routeLink + "/api/events", {
+          method: "post",
+          body: JSON.stringify({
+            date,
+            time,
+            location,
+            min,
+            max,
+          }),
+          headers: { "Content-Type": "application/json" },
+        });
+        if (response.ok) {
+          setsuccess(true);
+          console.log("Event Added Successfully");
+        }
+      } catch (err) {
+        setError(true);
+        console.error(err);
       }
-    } catch (err) {
-      setError(true);
-      console.error(err);
     }
   };
 
@@ -210,7 +217,7 @@ const EventForm = () => {
               value={formState.endTime}
               onChange={handleChange}
             >
-                            <option value="4:00A">4:00A</option>
+              <option value="4:00A">4:00A</option>
               <option value="4:15A">4:15A</option>
               <option value="4:30A">4:30A</option>
               <option value="4:45A">4:45A</option>
@@ -304,6 +311,47 @@ const EventForm = () => {
           </div>
         </div>
         <div className="sessionEl">
+        <h4>Minimum Players:</h4>
+          <div className="sessionFormOption">
+            <select
+              name="eventMin"
+              value={formState.eventMin}
+              onChange={handleChange}
+            >
+              <option value="01">01</option>
+              <option value="02">02</option>
+              <option value="03">03</option>
+              <option value="04">04</option>
+              <option value="05">05</option>
+              <option value="06">06</option>
+              <option value="07">07</option>
+              <option value="08">08</option>
+              <option value="09">09</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+              <option value="13">13</option>
+              <option value="14">14</option>
+              <option value="15">15</option>
+              <option value="16">16</option>
+              <option value="17">17</option>
+              <option value="18">18</option>
+              <option value="19">19</option>
+              <option value="20">20</option>
+              <option value="21">21</option>
+              <option value="22">22</option>
+              <option value="23">23</option>
+              <option value="24">24</option>
+              <option value="25">25</option>
+              <option value="26">26</option>
+              <option value="27">27</option>
+              <option value="28">28</option>
+              <option value="29">29</option>
+              <option value="30">30</option>
+              <option value="31">31</option>
+              <option value="32">32</option>
+            </select>
+          </div>
           <h4>Maximum Players:</h4>
           <div className="sessionFormOption">
             <select
@@ -350,6 +398,7 @@ const EventForm = () => {
           Submit
         </button>
       </form>
+      {success && <span>Session Added! (Reload)</span>}
       {error && <span>Something went wrong...</span>}
     </div>
   );

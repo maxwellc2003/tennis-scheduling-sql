@@ -27,11 +27,11 @@ app.use(session(sess));
 
 const corsOptions = {
   origin: "*",
-  credentials: true,
+  credentials: true, //access-control-allow-credentials:true
   optionSuccessStatus: 200,
 };
 
-app.use(cors(corsOptions));
+app.use(cors(corsOptions)); // Use this after the variable declaration
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -44,6 +44,12 @@ app.use(require("./controllers/"));
   console.log("Synced!");
 })();
 
+// FOR DEVELOPMENT:
+// app.listen(PORT, () => {
+//   console.log(`App listening on port ${PORT}!`);
+// });
+
+// FOR DEPLOYMENT: 
 const privateKey = fs.readFileSync('/home/web3605/ssl/keys/cb106_320e5_ac5a05edca714e826328d4f08e7ab642.key');
 const certificate = fs.readFileSync('/home/web3605/ssl/certs/_wildcard__tennisscheduling_com_cb106_320e5_1680397638_c945f5c015e55e90ec0aaf063aa967f5.crt');
 

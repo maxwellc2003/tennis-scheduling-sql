@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import initSlider from "../assets/js/slider.js";
 
@@ -6,14 +6,20 @@ import Slider from "../components/Slider";
 import Login from "../components/Login";
 import PlayerCard from "../components/PlayerCard";
 
-import Auth from "../hooks/auth";
+import Auth from "../utils/auth";
 
 const Home = () => {
+  const { loggedIn, setLoggedIn } = useState(false);
+
   useEffect(() => {
     initSlider();
-  }, []);
 
-  const loggedIn = Auth;
+    const test = Auth();
+
+    return () => {
+      setLoggedIn(test);
+    };
+  }, []);
 
   return (
     <main>

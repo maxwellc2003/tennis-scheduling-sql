@@ -3,9 +3,12 @@ import { Link } from "react-router-dom";
 
 import "../../assets/css/login.css";
 
+import routeLink from "../../utils/route";
+
 const Login = () => {
   const [formState, setFormState] = useState({ email: "", password: "" });
-  const [login, { loading, error }] = useMutation(LOGIN_USER);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -19,20 +22,34 @@ const Login = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
+    setLoading(true);
+
+    const email = formState.email;
+    const password = formState.password;
+
     try {
-      const { data } = await login({
-        variables: { ...formState },
+      const response = await fetch(routeLink + "/api/users/login", {
+        method: "post",
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+        headers: { "Content-Type": "application/json" },
       });
+      if (response.ok) {
+        setLoading(false);
+      }
+    } catch (e) {
+      console.log(e);
+      setError(true);
+    } finally {
+      setLoading(false);
 
-      Auth.login(data.login.token);
-    } catch (err) {
-      console.error(err);
+      setFormState({
+        email: "",
+        password: "",
+      });
     }
-
-    setFormState({
-      email: "",
-      password: "",
-    });
   };
 
   return (

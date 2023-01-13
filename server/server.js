@@ -8,11 +8,7 @@ const cors = require("cors");
 
 const app = express();
 
-// FOR DEPLOYMENT:
 const PORT = process.env.PORT || 8334;
-
-// FOR DEVELOPMENT:
-// const PORT = process.env.PORT || 3001;
 
 const sequelize = require("./config/connection");
 const SequelizeStore = require("connect-session-sequelize")(session.Store);

@@ -7,7 +7,12 @@ const fs = require("fs");
 const cors = require("cors");
 
 const app = express();
-const PORT = process.env.PORT || 8443;
+
+// FOR DEPLOYMENT:
+const PORT = process.env.PORT || 8334;
+
+// FOR DEVELOPMENT:
+// const PORT = process.env.PORT || 3001;
 
 const sequelize = require("./config/connection");
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
@@ -43,10 +48,12 @@ app.use(require("./controllers/"));
   console.log("Synced!");
 })();
 
+// FOR DEVELOPMENT:
 // app.listen(PORT, () => {
 //   console.log(`App listening on port ${PORT}!`);
 // });
 
+// FOR DEPLOYMENT: 
 const privateKey = fs.readFileSync('/home/web3605/ssl/keys/cb106_320e5_ac5a05edca714e826328d4f08e7ab642.key');
 const certificate = fs.readFileSync('/home/web3605/ssl/certs/_wildcard__tennisscheduling_com_cb106_320e5_1680397638_c945f5c015e55e90ec0aaf063aa967f5.crt');
 

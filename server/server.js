@@ -26,7 +26,7 @@ const sess = {
 };
 
 const corsOptions = {
-  origin: "*",
+  origin: "https://tennisscheduling.com:8443",
   credentials: true, //access-control-allow-credentials:true
   optionSuccessStatus: 200,
 };

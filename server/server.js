@@ -26,12 +26,10 @@ const sess = {
 };
 
 const corsOptions = {
-  origin: "https://tennisscheduling.com:8443",
+  origin: "https://tennisscheduling.com",
   credentials: true, //access-control-allow-credentials:true
   optionSuccessStatus: 200,
 };
-
-app.use(cors(corsOptions)); // Use this after the variable declaration
 
 app.use(session(sess));
 

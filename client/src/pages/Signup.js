@@ -96,7 +96,6 @@ const Signup = () => {
             password,
           }),
           credentials: "include",
-          origin: "https://tennisscheduling.com:8443",
           headers: { "Content-Type": "application/json" },
         });
         if (response.ok) {

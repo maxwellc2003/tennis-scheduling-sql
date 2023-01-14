@@ -646,22 +646,12 @@ function cardSelected(selected, data) {
   let eventInfoEl = document.createElement("div");
 
   //empty bucket
-  if (parentEl.querySelector(".selected-event") !== null) {
+  while (parentEl.querySelector(".selected-event") !== null) {
     parentEl.removeChild(parentEl.lastChild);
   }
 
   containerEl.classList.add("selected-event");
   eventInfoEl.classList.add("event-info-container");
-
-  // date info
-  let dateContainerEl = document.createElement("div");
-  dateContainerEl.classList.add("date-container");
-  let dateLabelEl = document.createElement("h3");
-  let dateEl = document.createElement("h4");
-  dateEl.classList.add("date");
-
-  dateLabelEl.textContent = "Date";
-  dateEl.textContent = data[selected].date;
 
   // location info
   let locationContainerEl = document.createElement("div");
@@ -684,22 +674,33 @@ function cardSelected(selected, data) {
   timeEl.textContent = data[selected].time;
 
   //max-ppl players info
+  let minpplContainerEl = document.createElement("div");
+  minpplContainerEl.classList.add("min-ppl-container");
+  let minpplLabelEl = document.createElement("h3");
+  let minpplEl = document.createElement("h4");
+  minpplEl.classList.add("min-ppl");
+
+  minpplLabelEl.textContent = "Min";
+  minpplEl.textContent = data[selected].min;
+
+  //max-ppl players info
   let maxpplContainerEl = document.createElement("div");
   maxpplContainerEl.classList.add("max-ppl-container");
   let maxpplLabelEl = document.createElement("h3");
   let maxpplEl = document.createElement("h4");
   maxpplEl.classList.add("max-ppl");
 
-  maxpplLabelEl.textContent = "Max Players Allowed";
+  maxpplLabelEl.textContent = "Max";
   maxpplEl.textContent = data[selected].max;
+
+  //max-ppl players info
+  let rsvpEl = document.createElement("button");
+  rsvpEl.classList.add("rsvp-button");
+  rsvpEl.textContent = "RSVP";
 
   // parent appends
   parentEl.appendChild(containerEl);
   containerEl.appendChild(eventInfoEl);
-  // date appends
-  eventInfoEl.appendChild(dateContainerEl);
-  dateContainerEl.appendChild(dateLabelEl);
-  dateContainerEl.appendChild(dateEl);
   //location appends
   eventInfoEl.appendChild(locationContainerEl);
   locationContainerEl.appendChild(locationLabelEl);
@@ -708,8 +709,22 @@ function cardSelected(selected, data) {
   eventInfoEl.appendChild(timeContainerEl);
   timeContainerEl.appendChild(timeLabelEl);
   timeContainerEl.appendChild(timeEl);
+  // minppl appends
+  eventInfoEl.appendChild(minpplContainerEl);
+  minpplContainerEl.appendChild(minpplLabelEl);
+  minpplContainerEl.appendChild(minpplEl);
   // maxppl appends
   eventInfoEl.appendChild(maxpplContainerEl);
   maxpplContainerEl.appendChild(maxpplLabelEl);
   maxpplContainerEl.appendChild(maxpplEl);
+  // rsvp appends
+  parentEl.appendChild(rsvpEl);
+
+  document
+    .querySelector(".rsvp-button")
+    .addEventListener("click", rsvp(selected));
+}
+
+function rsvp(selected) {
+  console.log("here: ", selected);
 }

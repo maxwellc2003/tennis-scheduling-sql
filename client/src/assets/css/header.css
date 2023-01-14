@@ -25,6 +25,11 @@ header {
   align-items: center;
 }
 
+.header-right p  {
+  color: var(--icon-color);
+  margin-right: 10px;
+}
+
 .header-icon {
   color: var(--icon-color);
   margin: 5px;

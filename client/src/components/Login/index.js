@@ -7,8 +7,7 @@ import routeLink from "../../utils/route";
 
 const Login = () => {
   const [formState, setFormState] = useState({ email: "", password: "" });
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+  const [status, setStatus] = useState("");
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -22,13 +21,13 @@ const Login = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
-    setLoading(true);
+    setStatus("Loading...");
 
     const email = formState.email;
     const password = formState.password;
 
     try {
-      await fetch(routeLink + "/api/users/login", {
+      const response = await fetch(routeLink + "/api/users/login", {
         method: "post",
         body: JSON.stringify({
           email,
@@ -37,13 +36,14 @@ const Login = () => {
         credentials: "include",
         headers: { "Content-Type": "application/json" },
       });
+      if (response.ok) {
+        document.location.reload();
+      } else {
+        setStatus("Login failed");
+      }
     } catch (e) {
       console.log(e);
-      setError(true);
-    } finally {
-      if (error === false) {
-        document.location.reload();
-      }
+      setStatus("An error occurred");
     }
   };
 
@@ -98,8 +98,7 @@ const Login = () => {
             </Link>
           </div>
         </form>
-        {loading && <div>Loading...</div>}
-        {error && <div>Login unsuccessful</div>}
+        {status}
       </div>
     </div>
   );

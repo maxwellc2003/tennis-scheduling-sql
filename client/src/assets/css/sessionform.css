@@ -40,3 +40,12 @@
   background-color: var(--text-hover-color);
 }
 
+/* label styling (temp) */
+
+.location-selection {
+  margin-left: 33px;
+}
+
+.date-selection  {
+  margin-left: 65px;
+}

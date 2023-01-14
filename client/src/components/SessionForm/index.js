@@ -67,7 +67,7 @@ const EventForm = () => {
       <form className="post-form" onSubmit={handleSubmit}>
         <div className="sessionEl">
           <h4>Date:</h4>
-          <div className="sessionFormOption">
+          <div className="date-selection sessionFormOption">
             <select
               name="month"
               value={formState.month}
@@ -298,7 +298,7 @@ const EventForm = () => {
         </div>
         <div className="sessionEl">
           <h4>Location:</h4>
-          <div className="sessionFormOption">
+          <div className="location-selection sessionFormOption">
             <input
               name="eventLocation"
               type="text"

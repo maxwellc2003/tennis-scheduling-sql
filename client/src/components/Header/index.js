@@ -11,6 +11,7 @@ const Header = () => {
       <a href="/" ><img src={Banner} alt=""></img></a>
     </div>
     <div className="header-right">
+      <p>(Coming Soon)</p>
       <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" fill="currentColor" className="bi bi-help header-icon"
         viewBox="0 0 16 16">
         <path

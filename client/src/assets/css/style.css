@@ -221,6 +221,7 @@ main {
 }
 
 .card {
+  position: relative;
   margin: 5px;
   text-align: center;
   width: 80%;

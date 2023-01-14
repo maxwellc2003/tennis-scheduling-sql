@@ -42,7 +42,9 @@ const Login = () => {
       setError(true);
       return;
     } finally {
-      document.location.reload();
+      if (!error) {
+        document.location.reload();
+      }
     }
   };
 

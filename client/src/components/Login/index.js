@@ -40,9 +40,8 @@ const Login = () => {
     } catch (e) {
       console.log(e);
       setError(true);
-      return;
     } finally {
-      if (!error) {
+      if (error === false) {
         document.location.reload();
       }
     }

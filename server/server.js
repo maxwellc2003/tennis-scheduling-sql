@@ -13,9 +13,11 @@ const PORT = process.env.PORT || 8443;
 const sequelize = require("./config/connection");
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
 
+const THIRTY_MIN = 1000 * 60 * 30;
+
 const sess = {
-  secret: "abcdqweqeq",
-  cookie: { maxAge: 6000000 },
+  secret: "pass",
+  cookie: { maxAge: THIRTY_MIN },
   resave: false,
   saveUninitialized: false,
   store: new SequelizeStore({
@@ -24,7 +26,7 @@ const sess = {
 };
 
 const corsOptions = {
-  origin: "http://localhost:3000",
+  origin: "https://tennisscheduling.com:8443",
   credentials: true, //access-control-allow-credentials:true
   optionSuccessStatus: 200,
 };

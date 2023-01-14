@@ -3,8 +3,6 @@ const bcrypt = require("bcrypt");
 const sequelize = require("../config/connection");
 
 const phoneValidationRegex = /\d{3}-\d{3}-\d{4}/;
-const emailValidationRegex =
-  /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
 class User extends Model {
   checkPassword(loginPw) {
@@ -24,21 +22,11 @@ User.init(
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
-      validate: {
-        validator: function (v) {
-          return emailValidationRegex.test(v);
-        },
-      },
     },
     phone: {
       type: DataTypes.STRING,
       allowNull: true,
       unique: true,
-      validate: {
-        validator: function (v) {
-          return phoneValidationRegex.test(v);
-        },
-      },
     },
     username: {
       type: DataTypes.STRING,

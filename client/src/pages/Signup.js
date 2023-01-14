@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 
 import "../assets/css/signup.css";
@@ -10,7 +10,7 @@ const Signup = () => {
   // captcha
   const [captchaText, setCaptchaText] = useState(randomText());
   const [inputText, setInputText] = useState("");
-  const [bottomText, setBottomText] = useState("");
+  const [captchaStatus, setcaptchaStatus] = useState("");
 
   const captchaChange = (event) => {
     const { value } = event.target;
@@ -20,98 +20,76 @@ const Signup = () => {
 
   const captchaRefresh = () => {
     setInputText("");
-    setBottomText("");
+    setcaptchaStatus("");
     setCaptchaText(randomText());
   };
 
   const captchaSubmit = () => {
     if (inputText === "") {
-      setBottomText("Type your guess.");
+      setcaptchaStatus("Type your guess.");
       return;
     }
 
     if (inputText === captchaText) {
-      setBottomText("Correct!");
+      setcaptchaStatus("Correct!");
     } else {
       setInputText("");
-      setBottomText("Incorrect.");
+      setcaptchaStatus("Incorrect.");
     }
   };
 
   // privacy terms agreement
   const [agreement, setAgreement] = useState(false);
 
-  // form state initialised
-
-  const [formState, setFormState] = useState({
-    username: "",
-    email: "",
-    phone: "",
-    first: "",
-    last: "",
-    utr: "",
-    usta: "",
-    password: "",
-  });
-
-  // update form state
   const handleChange = (event) => {
     setAgreement(event.target.checked);
-
-    const { name, value } = event.target;
-
-    setFormState({
-      ...formState,
-      [name]: value,
-    });
   };
+
   // submit form
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+  const [status, setStatus] = useState("");
+
+  const emailRef = useRef();
+  const phoneRef = useRef();
+  const usernameRef = useRef();
+  const firstRef = useRef();
+  const lastRef = useRef();
+  const utrRef = useRef();
+  const ustaRef = useRef();
+  const passwordRef = useRef();
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
-    const email = formState.email;
-    const username = formState.username;
-    const first = formState.first;
-    const last = formState.last;
-    const utr = parseInt(formState.utr);
-    const usta = parseInt(formState.usta);
-    const password = formState.password;
-
-    if (bottomText === "Correct!") {
-      setLoading(true);
+    if (captchaStatus === "Correct!") {
+      setStatus("Loading...");
 
       try {
         const response = await fetch(routeLink + "/api/users", {
           method: "post",
           body: JSON.stringify({
-            email,
-            username,
-            first,
-            last,
-            utr,
-            usta,
-            password,
+            email: emailRef.current.value,
+            phone: phoneRef.current.value,
+            username: usernameRef.current.value,
+            first: firstRef.current.value,
+            last: lastRef.current.value,
+            utr: parseInt(utrRef.current.value),
+            usta: parseInt(ustaRef.current.value),
+            password: passwordRef.current.value,
           }),
           credentials: "include",
           headers: { "Content-Type": "application/json" },
         });
         if (response.ok) {
-          setLoading(false);
-          console.log("Signup Successful");
           document.location.replace("/");
+        } else {
+          setStatus("Signup failed");
         }
       } catch (e) {
         console.log(e);
-        setError(true);
-      } finally {
-        setLoading(false);
+        setStatus("An error occurred");
       }
     } else {
-      setBottomText("Captcha incomplete.");
-      return;
+      setStatus("Captcha incomplete.");
     }
   };
 
@@ -122,86 +100,51 @@ const Signup = () => {
         <form className="signup-form" onSubmit={handleFormSubmit}>
           <input
             className="signup-input"
-            name="email"
             type="email"
-            id="email"
             placeholder="Email"
-            value={formState.email}
-            onChange={handleChange}
+            ref={emailRef}
           />
-          {/* <input
-            className="signup-input"
-            type="text"
-            placeholder="Verify Email"
-          /> */}
           <input
             className="signup-input"
             type="text"
             placeholder="Phone Number (Optional)"
-            value={formState.phone}
-            name="phone"
-            id="phone"
-            onChange={handleChange}
+            ref={phoneRef}
           />
           <input
             className="signup-input"
-            name="username"
             type="username"
-            id="username"
             placeholder="Username"
-            value={formState.username}
-            onChange={handleChange}
+            ref={usernameRef}
           />
           <input
             className="signup-input"
             type="text"
             placeholder="First Name"
-            value={formState.first}
-            name="first"
-            id="first"
-            onChange={handleChange}
+            ref={firstRef}
           />
           <input
             className="signup-input"
             type="text"
             placeholder="Last Name"
-            value={formState.last}
-            name="last"
-            id="last"
-            onChange={handleChange}
+            ref={lastRef}
           />
           <input
             className="signup-input"
             type="number"
             placeholder="UTR Level (Optional)"
-            value={formState.utr}
-            name="utr"
-            id="utr"
-            onChange={handleChange}
+            ref={utrRef}
           />
           <input
             className="signup-input"
             type="number"
             placeholder="USTA Level (Optional)"
-            value={formState.usta}
-            name="usta"
-            id="usta"
-            onChange={handleChange}
+            ref={ustaRef}
           />
           <input
             className="signup-input"
-            name="password"
-            type="password"
-            id="password"
             placeholder="Password"
-            value={formState.password}
-            onChange={handleChange}
+            ref={passwordRef}
           />
-          {/* <input
-            className="signup-input"
-            type="text"
-            placeholder="Password Verification"
-          /> */}
           <div className="signup-input">
             <input type="checkbox" id="checkbox1" value="" />
             Would you like to recieve notifications? (Coming Soon)
@@ -240,7 +183,7 @@ const Signup = () => {
                 Refresh
               </button>
             </div>
-            {bottomText}
+            {captchaStatus}
           </div>
           <div className="signup-or-cancel">
             <button
@@ -256,8 +199,7 @@ const Signup = () => {
             </Link>
           </div>
         </form>
-        {loading && <div>Loading...</div>}
-        {error && <div>Signup failed</div>}
+        {status}
       </div>
     </main>
   );

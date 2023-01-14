@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 
 import "../../assets/css/login.css";
@@ -6,32 +6,22 @@ import "../../assets/css/login.css";
 import routeLink from "../../utils/route";
 
 const Login = () => {
-  const [formState, setFormState] = useState({ email: "", password: "" });
   const [status, setStatus] = useState("");
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-
-    setFormState({
-      ...formState,
-      [name]: value,
-    });
-  };
+  const emailRef = useRef();
+  const passwordRef = useRef();
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
     setStatus("Loading...");
 
-    const email = formState.email;
-    const password = formState.password;
-
     try {
       const response = await fetch(routeLink + "/api/users/login", {
         method: "post",
         body: JSON.stringify({
-          email,
-          password,
+          email : emailRef.current.value,
+          password : passwordRef.current.value,
         }),
         credentials: "include",
         headers: { "Content-Type": "application/json" },
@@ -54,21 +44,15 @@ const Login = () => {
         <form onSubmit={handleFormSubmit} className="login-form">
           <input
             className="form-element email"
-            name="email"
             type="email"
-            id="email"
             placeholder="Email"
-            value={formState.email}
-            onChange={handleChange}
+            ref={emailRef}
           />
           <input
             className="form-element password"
-            name="password"
             type="password"
-            id="password"
-            value={formState.password}
-            onChange={handleChange}
             placeholder="Password"
+            ref={passwordRef}
           />
           <div className="remember-or-forgot">
             <div>

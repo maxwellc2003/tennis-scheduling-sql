@@ -9,16 +9,16 @@ const Footer = () => {
   return (
     <footer>
       <div>
-        <Link to="/signup" className="footer-btn">Contact Us</Link>
+        <Link to="/contact" className="footer-btn">Contact Us</Link>
       </div>
       <div>
-        <Link to="/signup" className="footer-btn">Support Us</Link>
+        <Link to="/support" className="footer-btn">Support Us</Link>
       </div>
       <div>
-        <Link to="/signup" className="footer-btn">Team</Link>
+        <Link to="/team" className="footer-btn">Team</Link>
       </div>
       <div>
-        <Link to="/signup" className="footer-btn">Privacy Terms</Link>
+        <Link to="/privacyterms" className="footer-btn">Privacy Terms</Link>
       </div>
     </footer>
   );

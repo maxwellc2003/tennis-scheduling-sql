@@ -161,7 +161,7 @@ async function jumpTo(event) {
 async function filterCalendar(event) {
   event.preventDefault();
 
-  let choice = document.getElementById("location").value.trim();
+  let choice = document.getElementById("location");
 
   await renderCalendar(currentDate, choice);
 }
@@ -273,6 +273,8 @@ function displayEventData(date, data, filter) {
   let friday = date.startOf("isoweek").add(4, "days").format("MM/DD/YY");
   let saturday = date.startOf("isoweek").add(5, "days").format("MM/DD/YY");
   let sunday = date.startOf("isoweek").add(6, "days").format("MM/DD/YY");
+
+  console.log(filter);
 
   if (length >= 1) {
     for (let i = 0; i < length; i++) {

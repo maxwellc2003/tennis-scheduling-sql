@@ -9,16 +9,12 @@ import PlayerCard from "../components/PlayerCard";
 import Auth from "../utils/auth";
 
 const Home = () => {
-  const { loggedIn, setLoggedIn } = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
     initSlider();
 
-    const test = Auth();
-
-    return () => {
-      setLoggedIn(test);
-    };
+    Auth().then(setLoggedIn);
   }, []);
 
   return (

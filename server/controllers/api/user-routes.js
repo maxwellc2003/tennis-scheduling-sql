@@ -42,15 +42,11 @@ router.post("/", (req, res) => {
 });
 
 router.post("/login", (req, res) => {
-  console.log("body", req.body);
-  // res.status(200).json({ message: 'No user with that email address!' });
-  // expects {email: 'lernantino@gmail.com', password: 'password1234'}
   User.findOne({
     where: {
       email: req.body.email,
     },
   }).then((dbUserData) => {
-    console.log("dbUserData", dbUserData);
     if (!dbUserData) {
       res.status(400).json({ message: "No user with that email address!" });
       return;
@@ -68,7 +64,7 @@ router.post("/login", (req, res) => {
         res.status(404).json({ message: "Something went wrong!" });
         return;
       }
-
+      
       req.session.user_id = dbUserData.id;
       req.session.username = dbUserData.username;
       req.session.loggedIn = true;
@@ -82,12 +78,12 @@ router.post("/loggedIn", (req, res) => {
   if (req.session.loggedIn) {
     res.status(200).end();
   } else {
-    res.status(204).end();
+    res.status(401).end();
   }
 });
 
 router.post("/logout", (req, res) => {
-  if (req.session.loggedIn) {
+  if (req.session) {
     req.session.destroy(() => {
       res.status(204).end();
     });

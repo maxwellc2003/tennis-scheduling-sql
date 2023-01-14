@@ -28,27 +28,21 @@ const Login = () => {
     const password = formState.password;
 
     try {
-      const response = await fetch(routeLink + "/api/users/login", {
+      await fetch(routeLink + "/api/users/login", {
         method: "post",
         body: JSON.stringify({
           email,
           password,
         }),
+        credentials: "include",
         headers: { "Content-Type": "application/json" },
       });
-      if (response.ok) {
-        setLoading(false);
-      }
     } catch (e) {
       console.log(e);
       setError(true);
+      return;
     } finally {
-      setLoading(false);
-
-      setFormState({
-        email: "",
-        password: "",
-      });
+      document.location.reload();
     }
   };
 

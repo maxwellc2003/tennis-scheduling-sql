@@ -14,24 +14,25 @@ const sequelize = require("./config/connection");
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
 
 const sess = {
-  secret: "pass",
-  cookie: {},
+  secret: "abcdqweqeq",
+  cookie: { maxAge: 6000000 },
   resave: false,
-  saveUninitialized: true,
+  saveUninitialized: false,
   store: new SequelizeStore({
     db: sequelize,
   }),
 };
 
-app.use(session(sess));
-
 const corsOptions = {
-  origin: "*",
+  origin: "http://localhost:3000",
   credentials: true, //access-control-allow-credentials:true
   optionSuccessStatus: 200,
 };
 
 app.use(cors(corsOptions)); // Use this after the variable declaration
+
+app.use(session(sess));
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

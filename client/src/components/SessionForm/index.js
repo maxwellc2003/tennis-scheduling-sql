@@ -44,7 +44,6 @@ const EventForm = () => {
         });
         if (response.ok) {
           setsuccess(true);
-          console.log("Event Added Successfully");
         }
       } catch (err) {
         setError(true);

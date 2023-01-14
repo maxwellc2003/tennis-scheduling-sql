@@ -11,10 +11,13 @@ const PlayerCard = () => {
     try {
       fetch(routeLink + "/api/users/logout", {
         method: "post",
+        credentials: "include",
         headers: { "Content-Type": "application/json" },
       });
     } catch (e) {
       console.log(e);
+    } finally {
+      document.location.reload();
     }
   };
 

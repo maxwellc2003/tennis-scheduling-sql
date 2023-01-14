@@ -13,6 +13,7 @@ import Auth from "../utils/auth";
 const Calendar = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,11 +30,9 @@ const Calendar = () => {
         setLoading(false);
       }
     };
-
+    Auth().then(setLoggedIn);
     fetchData();
   }, []);
-
-  const loggedIn = Auth;
 
   return (
     <main>

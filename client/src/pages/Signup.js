@@ -95,6 +95,7 @@ const Signup = () => {
             usta,
             password,
           }),
+          credentials: "include",
           headers: { "Content-Type": "application/json" },
         });
         if (response.ok) {

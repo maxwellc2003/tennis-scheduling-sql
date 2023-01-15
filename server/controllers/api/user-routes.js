@@ -77,8 +77,6 @@ router.post("/login", (req, res) => {
 router.post("/loggedIn", (req, res) => {
   if (req.session.loggedIn) {
     res.status(200).end();
-  } else {
-    res.status(401).end();
   }
 });
 

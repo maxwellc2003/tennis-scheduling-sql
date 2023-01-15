@@ -6,13 +6,13 @@ import routeLink from "../../utils/route";
 
 const EventForm = () => {
   const [formState, setFormState] = useState({
-    month: "01",
-    day: "01",
+    month: "",
+    day: "",
     eventLocation: "",
-    startTime: "4:00A",
-    endTime: "4:00A",
-    eventMin: "01",
-    eventMax: "01",
+    startTime: "",
+    endTime: "",
+    eventMin: "",
+    eventMax: "",
   });
 
   const [error, setError] = useState(false);
@@ -73,6 +73,7 @@ const EventForm = () => {
               value={formState.month}
               onChange={handleChange}
             >
+              <option value="">N/A</option>
               <option value="01">January</option>
               <option value="02">February</option>
               <option value="03">March</option>
@@ -87,6 +88,7 @@ const EventForm = () => {
               <option value="12">December</option>
             </select>
             <select name="day" value={formState.day} onChange={handleChange}>
+              <option value="">N/A</option>
               <option value="01">01</option>
               <option value="02">02</option>
               <option value="03">03</option>
@@ -129,6 +131,7 @@ const EventForm = () => {
               value={formState.startTime}
               onChange={handleChange}
             >
+              <option value="">N/A</option>
               <option value="4:00A">4:00A</option>
               <option value="4:15A">4:15A</option>
               <option value="4:30A">4:30A</option>
@@ -216,6 +219,7 @@ const EventForm = () => {
               value={formState.endTime}
               onChange={handleChange}
             >
+              <option value="">N/A</option>
               <option value="4:00A">4:00A</option>
               <option value="4:15A">4:15A</option>
               <option value="4:30A">4:30A</option>
@@ -310,13 +314,14 @@ const EventForm = () => {
           </div>
         </div>
         <div className="sessionEl">
-        <h4>Minimum Players:</h4>
+          <h4>Minimum Players:</h4>
           <div className="sessionFormOption">
             <select
               name="eventMin"
               value={formState.eventMin}
               onChange={handleChange}
             >
+              <option value="">N/A</option>
               <option value="01">01</option>
               <option value="02">02</option>
               <option value="03">03</option>
@@ -358,6 +363,7 @@ const EventForm = () => {
               value={formState.eventMax}
               onChange={handleChange}
             >
+              <option value="">N/A</option>
               <option value="01">01</option>
               <option value="02">02</option>
               <option value="03">03</option>

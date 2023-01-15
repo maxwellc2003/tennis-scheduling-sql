@@ -20,7 +20,7 @@ const Contact = () => {
         </p>
         <button>Send Message</button>
         <div>
-        <FontAwesomeIcon icon={faEnvelope} />CustomerService@tennisscheduling.com
+        <FontAwesomeIcon icon={faEnvelope} />customerservice@tennisscheduling.com
         </div>
       </form>
     </main>

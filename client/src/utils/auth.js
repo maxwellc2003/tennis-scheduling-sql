@@ -6,9 +6,7 @@ export default async function Auth() {
     credentials: "include",
     headers: { "Content-Type": "application/json" },
   });
-  if (response.status === 200) {
+  if (response.ok) {
     return true;
-  } else if (response.status === 401) {
-    return false;
   }
 }

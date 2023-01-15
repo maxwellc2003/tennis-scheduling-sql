@@ -86,31 +86,31 @@ const CalendarEvents = (data) => {
       <div className="calendar-content">
         <div className="calendar-row">
           <div id="weekDay1" className="week-day"></div>
-          <div id="eventContainer1" className="event-container"></div>
+          <div id="monContainer" className="event-container"></div>
         </div>
         <div className="calendar-row">
           <div id="weekDay2" className="week-day"></div>
-          <div id="eventContainer2" className="event-container"></div>
+          <div id="tueContainer" className="event-container"></div>
         </div>
         <div className="calendar-row">
           <div id="weekDay3" className="week-day"></div>
-          <div id="eventContainer3" className="event-container"></div>
+          <div id="wedContainer" className="event-container"></div>
         </div>
         <div className="calendar-row">
           <div id="weekDay4" className="week-day"></div>
-          <div id="eventContainer4" className="event-container"></div>
+          <div id="thuContainer" className="event-container"></div>
         </div>
         <div className="calendar-row">
           <div id="weekDay5" className="week-day"></div>
-          <div id="eventContainer5" className="event-container"></div>
+          <div id="friContainer" className="event-container"></div>
         </div>
         <div className="calendar-row">
           <div id="weekDay6" className="week-day"></div>
-          <div id="eventContainer6" className="event-container"></div>
+          <div id="satContainer" className="event-container"></div>
         </div>
         <div className="calendar-row">
           <div id="weekDay7" className="week-day"></div>
-          <div id="eventContainer7" className="event-container"></div>
+          <div id="sunContainer" className="event-container"></div>
         </div>
       </div>
       <div className="calendar-footer">

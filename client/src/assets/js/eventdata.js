@@ -41,7 +41,7 @@ function displayEventData(date, data, filter) {
   for (let i = 0; i < length; i++) {
     // MONDAY
     if (data[i].eventDate === monday) {
-      let containerEl = document.getElementById("eventContainer1");
+      let containerEl = document.getElementById("monContainer");
       let cardEl = document.createElement("div");
       let timeEl = document.createElement("h5");
       let numberAttendingEl = document.createElement("p");
@@ -89,7 +89,7 @@ function displayEventData(date, data, filter) {
 
     // TUESDAY
     if (data[i].eventDate === tuesday) {
-      let containerEl = document.getElementById("eventContainer2");
+      let containerEl = document.getElementById("tueContainer");
       let cardEl = document.createElement("div");
       let timeEl = document.createElement("h5");
       let numberAttendingEl = document.createElement("p");
@@ -137,7 +137,7 @@ function displayEventData(date, data, filter) {
 
     // WEDNESDAY
     if (data[i].eventDate === wednesday) {
-      let containerEl = document.getElementById("eventContainer3");
+      let containerEl = document.getElementById("wedContainer");
       let cardEl = document.createElement("div");
       let timeEl = document.createElement("h5");
       let numberAttendingEl = document.createElement("p");
@@ -185,7 +185,7 @@ function displayEventData(date, data, filter) {
 
     // THURSDAY
     if (data[i].eventDate === thursday) {
-      let containerEl = document.getElementById("eventContainer4");
+      let containerEl = document.getElementById("thuContainer");
       let cardEl = document.createElement("div");
       let timeEl = document.createElement("h5");
       let numberAttendingEl = document.createElement("p");
@@ -233,7 +233,7 @@ function displayEventData(date, data, filter) {
 
     // FRIDAY
     if (data[i].eventDate === friday) {
-      let containerEl = document.getElementById("eventContainer5");
+      let containerEl = document.getElementById("friContainer");
       let cardEl = document.createElement("div");
       let timeEl = document.createElement("h5");
       let numberAttendingEl = document.createElement("p");
@@ -281,7 +281,7 @@ function displayEventData(date, data, filter) {
 
     // SATURDAY
     if (data[i].eventDate === saturday) {
-      let containerEl = document.getElementById("eventContainer6");
+      let containerEl = document.getElementById("satContainer");
       let cardEl = document.createElement("div");
       let timeEl = document.createElement("h5");
       let numberAttendingEl = document.createElement("p");
@@ -329,7 +329,7 @@ function displayEventData(date, data, filter) {
 
     // SUNDAY
     if (data[i].eventDate === sunday) {
-      let containerEl = document.getElementById("eventContainer7");
+      let containerEl = document.getElementById("sunContainer");
       let cardEl = document.createElement("div");
       let timeEl = document.createElement("h5");
       let numberAttendingEl = document.createElement("p");

@@ -10,7 +10,7 @@ const Signup = () => {
   // captcha
   const [captchaText, setCaptchaText] = useState(randomText());
   const [inputText, setInputText] = useState("");
-  const [captchaStatus, setcaptchaStatus] = useState("");
+  const [captchaStatus, setcaptchaStatus] = useState("Incomplete");
 
   const captchaChange = (event) => {
     const { value } = event.target;
@@ -31,10 +31,10 @@ const Signup = () => {
     }
 
     if (inputText === captchaText) {
-      setcaptchaStatus("Correct!");
+      setcaptchaStatus("Correct");
     } else {
       setInputText("");
-      setcaptchaStatus("Incorrect.");
+      setcaptchaStatus("Incorrect");
     }
   };
 
@@ -60,7 +60,7 @@ const Signup = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
-    if (captchaStatus === "Correct!") {
+    if (captchaStatus === "Correct") {
       setStatus("Loading...");
 
       try {
@@ -88,8 +88,6 @@ const Signup = () => {
         console.log(e);
         setStatus("An error occurred");
       }
-    } else {
-      setStatus("Captcha incomplete.");
     }
   };
 
@@ -101,48 +99,49 @@ const Signup = () => {
           <input
             className="signup-input"
             type="email"
-            placeholder="Email"
+            placeholder="Email (Required)"
             ref={emailRef}
           />
           <input
             className="signup-input"
             type="text"
-            placeholder="Phone Number (Optional)"
+            placeholder="Phone Number"
             ref={phoneRef}
           />
           <input
             className="signup-input"
             type="username"
-            placeholder="Username"
+            placeholder="Username (Required)"
             ref={usernameRef}
           />
           <input
             className="signup-input"
             type="text"
-            placeholder="First Name"
+            placeholder="First Name (Required)"
             ref={firstRef}
           />
           <input
             className="signup-input"
             type="text"
-            placeholder="Last Name"
+            placeholder="Last Name (Required)"
             ref={lastRef}
           />
           <input
             className="signup-input"
             type="number"
-            placeholder="UTR Level (Optional)"
+            placeholder="UTR Level"
             ref={utrRef}
           />
           <input
             className="signup-input"
             type="number"
-            placeholder="USTA Level (Optional)"
+            placeholder="USTA Level"
             ref={ustaRef}
           />
           <input
+            type="password"
             className="signup-input"
-            placeholder="Password"
+            placeholder="Password (Required)"
             ref={passwordRef}
           />
           <div className="signup-input">
@@ -162,7 +161,6 @@ const Signup = () => {
             <div id="captcha">{captchaText}</div>
             <input
               id="textBox"
-              type="text"
               name="userText"
               value={inputText}
               onChange={captchaChange}

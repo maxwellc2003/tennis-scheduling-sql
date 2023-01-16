@@ -1,7 +1,5 @@
 import moment from "moment";
 
-const currentDate = moment();
-
 function getMondayOfCurrentWeek(date) {
   let monday = date.startOf("isoweek");
 
@@ -178,20 +176,8 @@ function dropdown2() {
   document.getElementById("dropdownBtn2").classList.toggle("dropbtn-focus2");
 }
 
-function calendarLeft() {
-  currentDate.subtract(7, "days");
-
-  renderCalendar(currentDate);
-}
-
-function calendarRight() {
-  currentDate.add(7, "days");
-
-  renderCalendar(currentDate);
-}
-
-export default function initCalendar(data) {
-  onStart(data);
+export default function initCalendar(currentDate, data) {
+  renderCalendar(currentDate, data);
 
   //Jump to event listener
   document.getElementById("jumpToBtn").addEventListener("click", jumpTo);
@@ -204,18 +190,6 @@ export default function initCalendar(data) {
   //Drop down event listeners
   document.getElementById("dropdownBtn2").addEventListener("click", dropdown2);
   document.getElementById("dropdownBtn").addEventListener("click", dropdown);
-
-  //Calendar navigation
-  document.getElementById("arrow-left").addEventListener("click", calendarLeft);
-  document
-    .getElementById("arrow-left1")
-    .addEventListener("click", calendarLeft);
-  document
-    .getElementById("arrow-right")
-    .addEventListener("click", calendarRight);
-  document
-    .getElementById("arrow-right1")
-    .addEventListener("click", calendarRight);
 }
 
 async function renderCalendar(date, data, filter) {
@@ -227,10 +201,6 @@ async function renderCalendar(date, data, filter) {
   displayEventData(date, data, filter);
 
   await loadFilterOptions(data);
-}
-
-async function onStart(data) {
-  await renderCalendar(currentDate, data);
 }
 
 // event data logic
@@ -693,11 +663,6 @@ function cardSelected(selected, data) {
   maxpplLabelEl.textContent = "Max";
   maxpplEl.textContent = data[selected].max;
 
-  //max-ppl players info
-  let rsvpEl = document.createElement("button");
-  rsvpEl.classList.add("rsvp-button");
-  rsvpEl.textContent = "RSVP";
-
   // parent appends
   parentEl.appendChild(containerEl);
   containerEl.appendChild(eventInfoEl);
@@ -717,14 +682,4 @@ function cardSelected(selected, data) {
   eventInfoEl.appendChild(maxpplContainerEl);
   maxpplContainerEl.appendChild(maxpplLabelEl);
   maxpplContainerEl.appendChild(maxpplEl);
-  // rsvp appends
-  parentEl.appendChild(rsvpEl);
-
-  document
-    .querySelector(".rsvp-button")
-    .addEventListener("click", rsvp(selected));
-}
-
-function rsvp(selected) {
-  console.log("here: ", selected);
 }

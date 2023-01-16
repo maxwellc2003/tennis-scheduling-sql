@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import moment from "moment";
 
 import "../../assets/css/sessionform.css";
-import routeLink from "../../utils/route";
+import routeLink from "../../utils/routeLink";
 
 const EventForm = () => {
   const [formState, setFormState] = useState({

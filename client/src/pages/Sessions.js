@@ -1,21 +1,23 @@
 import React, { useEffect, useState } from "react";
 
 import "../assets/css/calendar.css";
-import routeLink from "../utils/route";
+import routeLink from "../utils/routeLink";
 
 import Login from "../components/Login";
 import PlayerCard from "../components/PlayerCard";
 import SessionForm from "../components/SessionForm";
-import CalendarEvents from "../components/CalendarEvents";
+import Calendar from "../components/Calendar";
 
-import Auth from "../utils/auth";
+import Auth from "../utils/checkAuth";
 
-const Calendar = () => {
+const Sessions = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
+    Auth().then(setLoggedIn);
+
     const fetchData = async () => {
       setLoading(true);
 
@@ -30,7 +32,7 @@ const Calendar = () => {
         setLoading(false);
       }
     };
-    Auth().then(setLoggedIn);
+
     fetchData();
   }, []);
 
@@ -38,7 +40,7 @@ const Calendar = () => {
     <main>
       <div className="main-left">
         <div className="calendar-wrapper">
-          {loading ? <div>Loading...</div> : <CalendarEvents data={data} />}
+          {loading ? <div>Loading...</div> : <Calendar data={data} />}
         </div>
       </div>
       <div className="main-right">
@@ -50,4 +52,4 @@ const Calendar = () => {
   );
 };
 
-export default Calendar;
+export default Sessions;

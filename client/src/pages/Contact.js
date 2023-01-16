@@ -7,7 +7,7 @@ import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 const Contact = () => {
   return (
     <main>
-      <form class="contact-form">
+      <form className="contact-form">
         <h2>CONTACT US</h2>
         <p type="Name:">
           <input placeholder="Write your name here.."></input>

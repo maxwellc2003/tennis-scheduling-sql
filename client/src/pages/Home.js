@@ -6,15 +6,15 @@ import Slider from "../components/Slider";
 import Login from "../components/Login";
 import PlayerCard from "../components/PlayerCard";
 
-import Auth from "../utils/auth";
+import Auth from "../utils/checkAuth";
 
 const Home = () => {
   const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
-    initSlider();
-
     Auth().then(setLoggedIn);
+
+    initSlider();
   }, []);
 
   return (

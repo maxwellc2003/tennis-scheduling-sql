@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 
 import "../assets/css/signup.css";
 import "../assets/css/captcha.css";
-import randomText from "../utils/randomText";
-import routeLink from "../utils/route";
+import captcha from "../assets/js/captchaText";
+import routeLink from "../utils/routeLink";
 
 const Signup = () => {
   // captcha
-  const [captchaText, setCaptchaText] = useState(randomText());
+  const [captchaText, setCaptchaText] = useState(captcha());
   const [inputText, setInputText] = useState("");
   const [captchaStatus, setcaptchaStatus] = useState("Incomplete");
 
@@ -21,7 +21,7 @@ const Signup = () => {
   const captchaRefresh = () => {
     setInputText("");
     setcaptchaStatus("");
-    setCaptchaText(randomText());
+    setCaptchaText(captcha());
   };
 
   const captchaSubmit = () => {
@@ -38,8 +38,9 @@ const Signup = () => {
     }
   };
 
-  // privacy terms agreement
+  // on change checkers
   const [agreement, setAgreement] = useState(false);
+  const [phoneFormatStatus, setPhoneFormatStatus]= useState("");
 
   const handleChange = (event) => {
     setAgreement(event.target.checked);
@@ -60,7 +61,7 @@ const Signup = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
-    if (captchaStatus === "Correct") {
+    if (captchaStatus === "Correct" && phoneFormatStatus === "") {
       setStatus("Loading...");
 
       try {
@@ -94,7 +95,7 @@ const Signup = () => {
   return (
     <main>
       <div className="signup-form-container">
-        <h1>New User Registration</h1>
+        <h1 className="reg-title">Registration Form</h1>
         <form className="signup-form" onSubmit={handleFormSubmit}>
           <input
             className="signup-input"

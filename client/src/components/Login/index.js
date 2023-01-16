@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import "../../assets/css/login.css";
 
-import routeLink from "../../utils/route";
+import routeLink from "../../utils/routeLink";
 
 const Login = () => {
   const [status, setStatus] = useState("");

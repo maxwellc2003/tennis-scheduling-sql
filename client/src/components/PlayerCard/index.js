@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import "../../assets/css/playercard.css";
 
-import routeLink from "../../utils/route";
+import routeLink from "../../utils/routeLink";
 
 const PlayerCard = () => {
   const logout = (event) => {
@@ -23,7 +23,7 @@ const PlayerCard = () => {
 
   return (
     <div className="form-wrapper">
-      <h1>...Coming Soon</h1>
+      <h1>Coming Soon...</h1>
       <div className="border"></div>
       <h2>Welcome, Player!</h2>
       <div className="border"></div>

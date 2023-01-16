@@ -1,4 +1,4 @@
-import routeLink from "../utils/route";
+import routeLink from "../utils/routeLink";
 
 export default async function Auth() {
   const response = await fetch(routeLink + "/api/users/loggedIn", {

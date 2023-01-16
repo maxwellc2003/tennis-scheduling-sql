@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from "react";
 
+import moment from "moment";
+
 // We can add more character to this
 
 import initCalendar from "../../assets/js/calendar.js";
+import weekDays from "../../utils/weekDays";
 
-const CalendarEvents = (data) => {
-  const [number, setNumber] = useState(Math.random);
+const CalendarEvents = (events) => {
+  const [currentDate, setCurrentDate] = useState(moment());
 
   useEffect(() => {
-    initCalendar(data.data);
-  }, [number]);
+    console.log(weekDays(currentDate));
+    initCalendar(currentDate, events.data);
+  }, [currentDate]);
 
   return (
     <div className="calendar">
@@ -48,23 +52,22 @@ const CalendarEvents = (data) => {
               </form>
             </div>
           </div>
-          {/* <i className="help-button material-icons" style="font-size:36px">
-                  help_outline
-                </i> */}
         </div>
         <div className="calendar-header-date">
           <i
-            onClick={() => setNumber(Math.random)}
             id="arrow-left"
             className="arrow left"
+            onClick={() =>
+              setCurrentDate(moment(currentDate.subtract(7, "days")))
+            }
           ></i>
           <h1 id="current-week-header" className="current-week">
             placeholder
           </h1>
           <i
-            onClick={() => setNumber(Math.random)}
             id="arrow-right"
             className="arrow right"
+            onClick={() => setCurrentDate(moment(currentDate.add(7, "days")))}
           ></i>
         </div>
 
@@ -116,7 +119,9 @@ const CalendarEvents = (data) => {
       <div className="calendar-footer">
         <div className="calendar-footer-date">
           <i
-            onClick={() => setNumber(Math.random)}
+            onClick={() =>
+              setCurrentDate(moment(currentDate.subtract(7, "days")))
+            }
             id="arrow-left1"
             className="arrow left"
           ></i>
@@ -124,7 +129,7 @@ const CalendarEvents = (data) => {
             placeholder
           </h1>
           <i
-            onClick={() => setNumber(Math.random)}
+            onClick={() => setCurrentDate(moment(currentDate.add(7, "days")))}
             id="arrow-right1"
             className="arrow right"
           ></i>

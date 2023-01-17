@@ -9,10 +9,12 @@ import weekDays from "../../utils/weekDays";
 
 const CalendarEvents = (events) => {
   const [currentDate, setCurrentDate] = useState(moment());
+  const [calendarDays, setCalendarDays] = useState(weekDays(currentDate));
 
   useEffect(() => {
-    console.log(weekDays(currentDate));
     initCalendar(currentDate, events.data);
+
+    setCalendarDays(weekDays(currentDate));
   }, [currentDate]);
 
   return (

@@ -141,7 +141,7 @@ const CalendarEvents = (events) => {
                 >
                   <p>{event.event_users.length}</p>
                   <div className="number-attending-icon"></div>
-                  <h6>{event.time}</h6>
+                  <h6>{event.time.slice(0, event.time.indexOf('-'))}</h6>
                 </div>
               ))}
           </div>
@@ -162,7 +162,7 @@ const CalendarEvents = (events) => {
                 >
                   <p>{event.event_users.length}</p>
                   <div className="number-attending-icon"></div>
-                  <h6>{event.time}</h6>
+                  <h6>{event.time.slice(0, event.time.indexOf('-'))}</h6>
                 </div>
               ))}
           </div>
@@ -183,7 +183,7 @@ const CalendarEvents = (events) => {
                 >
                   <p>{event.event_users.length}</p>
                   <div className="number-attending-icon"></div>
-                  <h6>{event.time}</h6>
+                  <h6>{event.time.slice(0, event.time.indexOf('-'))}</h6>
                 </div>
               ))}
           </div>
@@ -204,7 +204,7 @@ const CalendarEvents = (events) => {
                 >
                   <p>{event.event_users.length}</p>
                   <div className="number-attending-icon"></div>
-                  <h6>{event.time}</h6>
+                  <h6>{event.time.slice(0, event.time.indexOf('-'))}</h6>
                 </div>
               ))}
           </div>
@@ -225,7 +225,7 @@ const CalendarEvents = (events) => {
                 >
                   <p>{event.event_users.length}</p>
                   <div className="number-attending-icon"></div>
-                  <h6>{event.time}</h6>
+                  <h6>{event.time.slice(0, event.time.indexOf('-'))}</h6>
                 </div>
               ))}
           </div>
@@ -246,7 +246,7 @@ const CalendarEvents = (events) => {
                 >
                   <p>{event.event_users.length}</p>
                   <div className="number-attending-icon"></div>
-                  <h6>{event.time}</h6>
+                  <h6>{event.time.slice(0, event.time.indexOf('-'))}</h6>
                 </div>
               ))}
           </div>
@@ -267,7 +267,7 @@ const CalendarEvents = (events) => {
                 >
                   <p>{event.event_users.length}</p>
                   <div className="number-attending-icon"></div>
-                  <h6>{event.time}</h6>
+                  <h6>{event.time.slice(0, event.time.indexOf('-'))}</h6>
                 </div>
               ))}
           </div>

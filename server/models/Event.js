@@ -24,7 +24,6 @@ Event.init(
     time: {
       type: DataTypes.STRING,
       allowNull: false,
-      len: [15],
     },
     min: {
       type: DataTypes.DECIMAL,

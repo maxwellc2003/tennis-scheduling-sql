@@ -23,7 +23,7 @@
   /* front page roots */
   --front-page-main-text-color: black;
   --front-page-main-background-color: #e3e3e3;
-   /* signup page roots */
+  /* signup page roots */
   --signup-background: #e3e3e3;
   --signup-text: black;
 }
@@ -231,7 +231,8 @@ main {
   color: white;
 }
 
-.card h6 {
+.card h6 { 
+  font-size: small;
   margin: 10px;
 }
 

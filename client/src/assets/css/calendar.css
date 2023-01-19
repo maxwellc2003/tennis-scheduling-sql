@@ -254,17 +254,20 @@
 /* pop up div */
 
 .pop-up {
+  background-color: var(--banner-color);
   z-index: 9999;
-  opacity: 0.9;
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 20em;
   height: auto;
-  background-color: grey;
   border-radius: 6px;
   text-align: center;
+  /* For Internet Explorer */
+  box-shadow: 0 0 0 1000px rgba(0, 0, 0, 0.3);
+  /* For other browsers */
+  box-shadow: 0 0 0 100vmax rgba(0, 0, 0, 0.3);
 }
 
 .close-pop-up {
@@ -285,12 +288,26 @@
 }
 
 .pop-up button {
+  color: white;
+  background-color: var(--calendar-btn);
   border: none;
   border-radius: 6px;
-  margin-bottom: 15px;
   margin-right: 5px;
+}
+
+.pop-up button:hover {
+  background-color: var(--text-hover-color);
+  cursor: pointer;
 }
 
 .view-players:hover {
   cursor: pointer;
+}
+
+.player-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0;
+  list-style: none;
 }

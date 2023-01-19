@@ -8,7 +8,7 @@ const cors = require("cors");
 
 const app = express();
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 8443;
 
 const sequelize = require("./config/connection");
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
@@ -26,7 +26,7 @@ const sess = {
 };
 
 const corsOptions = {
-  origin: "http://localhost:3000", // http://localhost:3000  https://tennisscheduling.com
+  origin: "https://tennisscheduling.com", // http://localhost:3000  https://tennisscheduling.com
   credentials: true, //access-control-allow-credentials:true
   optionSuccessStatus: 200,
 };
@@ -47,21 +47,21 @@ app.use(require("./controllers/"));
 })();
 
 // FOR DEVELOPMENT:
-app.listen(PORT, () => {
-  console.log(`App listening on port ${PORT}!`);
-});
+// app.listen(PORT, () => {
+//   console.log(`App listening on port ${PORT}!`);
+// });
 
 // FOR DEPLOYMENT:
-// const privateKey = fs.readFileSync(
-//   "/home/web3605/ssl/keys/cb106_320e5_ac5a05edca714e826328d4f08e7ab642.key"
-// );
-// const certificate = fs.readFileSync(
-//   "/home/web3605/ssl/certs/_wildcard__tennisscheduling_com_cb106_320e5_1680397638_c945f5c015e55e90ec0aaf063aa967f5.crt"
-// );
+const privateKey = fs.readFileSync(
+  "/home/web3605/ssl/keys/cb106_320e5_ac5a05edca714e826328d4f08e7ab642.key"
+);
+const certificate = fs.readFileSync(
+  "/home/web3605/ssl/certs/_wildcard__tennisscheduling_com_cb106_320e5_1680397638_c945f5c015e55e90ec0aaf063aa967f5.crt"
+);
 
-// const credentials = { key: privateKey, cert: certificate };
+const credentials = { key: privateKey, cert: certificate };
 
-// const server = https.createServer(credentials, app);
-// server.listen(PORT, () => {
-//   console.log(`Https app listening on port ${PORT}!`);
-// });
+const server = https.createServer(credentials, app);
+server.listen(PORT, () => {
+  console.log(`Https app listening on port ${PORT}!`);
+});

@@ -2,6 +2,8 @@ import React, { useState } from "react";
 
 import moment from "moment";
 
+import routeLink from "../../utils/routeLink";
+
 import weekDays from "../../utils/weekDays";
 
 const CalendarEvents = (events) => {
@@ -11,7 +13,14 @@ const CalendarEvents = (events) => {
 
   // pop up
   const [hidden, setHidden] = useState(true);
+  const [status, setStatus] = useState("");
+  const [playersOpen, setOpenPlayers] = useState(false);
+  const [players, setPlayers] = useState([]);
   const [popUpInfo, setPopUpInfo] = useState({
+    id: "",
+    day: "",
+    month: "",
+    dayInMonth: "",
     time: "",
     location: "",
     min: "",
@@ -21,20 +30,35 @@ const CalendarEvents = (events) => {
   return (
     <div className="calendar">
       <div className={`pop-up ${hidden ? "hidden" : ""}`}>
-        <h2>{popUpInfo.time}</h2>
+        <h2>
+          {popUpInfo.day}, {popUpInfo.month} {popUpInfo.dayInMonth} @{" "}
+          {popUpInfo.time}
+        </h2>
         <h2>Location: {popUpInfo.location}</h2>
-        <h2>Minimum: {popUpInfo.min}</h2>
-        <h2>Maximum: {popUpInfo.max}</h2>
-        <button onClick={() => console.log("rsvp")}>RSVP</button>
+        <h4>
+          Minimum {popUpInfo.min} to {popUpInfo.max} players
+        </h4>
+        <button onClick={() => rsvp(popUpInfo.id)}>RSVP</button>
         <a
           href="#"
-          onClick={() => console.log("view players")}
+          onClick={() => setOpenPlayers(true)}
           className="view-players"
         >
-          (View Players)
+          (View Player List)
         </a>
+        {playersOpen && (
+          // console.log(players[0])
+          <ul className="player-list">
+            {players[0].map((player) => (
+              <li key={player.id}>
+                {player.first} {player.last}
+              </li>
+            ))}
+          </ul>
+        )}
+        <p>{status}</p>
 
-        <div onClick={() => setHidden(true)} href="#" className="close-pop-up">
+        <div onClick={() => closePopUp()} href="#" className="close-pop-up">
           x
         </div>
       </div>
@@ -113,7 +137,7 @@ const CalendarEvents = (events) => {
                 <div
                   className="card"
                   key={event.id}
-                  onClick={() => setPopUp(event)}
+                  onClick={() => openPopUp(event, calendarDays[0])}
                 >
                   <p>{event.event_users.length}</p>
                   <div className="number-attending-icon"></div>
@@ -134,7 +158,7 @@ const CalendarEvents = (events) => {
                 <div
                   className="card"
                   key={event.id}
-                  onClick={() => setPopUp(event)}
+                  onClick={() => openPopUp(event, calendarDays[1])}
                 >
                   <p>{event.event_users.length}</p>
                   <div className="number-attending-icon"></div>
@@ -155,7 +179,7 @@ const CalendarEvents = (events) => {
                 <div
                   className="card"
                   key={event.id}
-                  onClick={() => setPopUp(event)}
+                  onClick={() => openPopUp(event, calendarDays[2])}
                 >
                   <p>{event.event_users.length}</p>
                   <div className="number-attending-icon"></div>
@@ -176,7 +200,7 @@ const CalendarEvents = (events) => {
                 <div
                   className="card"
                   key={event.id}
-                  onClick={() => setPopUp(event)}
+                  onClick={() => openPopUp(event, calendarDays[3])}
                 >
                   <p>{event.event_users.length}</p>
                   <div className="number-attending-icon"></div>
@@ -197,7 +221,7 @@ const CalendarEvents = (events) => {
                 <div
                   className="card"
                   key={event.id}
-                  onClick={() => setPopUp(event)}
+                  onClick={() => openPopUp(event, calendarDays[4])}
                 >
                   <p>{event.event_users.length}</p>
                   <div className="number-attending-icon"></div>
@@ -218,7 +242,7 @@ const CalendarEvents = (events) => {
                 <div
                   className="card"
                   key={event.id}
-                  onClick={() => setPopUp(event)}
+                  onClick={() => openPopUp(event, calendarDays[5])}
                 >
                   <p>{event.event_users.length}</p>
                   <div className="number-attending-icon"></div>
@@ -239,7 +263,7 @@ const CalendarEvents = (events) => {
                 <div
                   className="card"
                   key={event.id}
-                  onClick={() => setPopUp(event)}
+                  onClick={() => openPopUp(event, calendarDays[6])}
                 >
                   <p>{event.event_users.length}</p>
                   <div className="number-attending-icon"></div>
@@ -264,17 +288,49 @@ const CalendarEvents = (events) => {
     </div>
   );
 
-  function rsvp(event, auth) {}
+  async function rsvp(id) {
+    try {
+      const response = await fetch(routeLink + "/api/events/attend", {
+        method: "post",
+        body: JSON.stringify({
+          event_id: id,
+        }),
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+      });
+      if (response.ok) {
+        setStatus("Successfully added your name to the list!");
+      } else {
+        setStatus("You are not logged in or already on the list.");
+      }
+    } catch (e) {
+      console.log(e);
+      setStatus("Something went wrong");
+    }
+  }
 
-  function setPopUp(data) {
+  function openPopUp(data, date) {
     setHidden(false);
 
+    setPlayers([data.event_users]);
+
     setPopUpInfo({
+      id: data.id,
+      day: moment(date).format("ddd"),
+      month: moment(date).format("MMM"),
+      dayInMonth: moment(date).format("Do"),
       time: data.time,
       location: data.location,
       min: data.min,
       max: data.max,
     });
+  }
+
+  function closePopUp() {
+    setOpenPlayers(false);
+    setHidden(true);
+    setPlayers([]);
+    setStatus("");
   }
 
   function changeDateLeft() {

@@ -4,9 +4,29 @@ const User = require("../../models/User.");
 // get all users
 router.get("/", (req, res) => {
   User.findAll({
-    attributes: { exclude: ['password'] }
+    attributes: { exclude: ["password"] },
   })
     .then((dbUserData) => res.json(dbUserData))
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+});
+
+// get session users data
+router.get("/me", (req, res) => {
+  User.findOne({
+    where: {
+      id: req.session.user_id,
+    },
+  })
+    .then((dbUserData) => {
+      if (!dbUserData) {
+        res.status(404).json({ message: "No user found!" });
+        return;
+      }
+      res.json(dbUserData);
+    })
     .catch((err) => {
       console.log(err);
       res.status(500).json(err);
@@ -19,6 +39,7 @@ router.get("/:id", (req, res) => {
     where: {
       id: req.params.id,
     },
+    attributes: { exclude: ["password"] },
   })
     .then((dbUserData) => {
       if (!dbUserData) {
@@ -83,7 +104,7 @@ router.post("/login", (req, res) => {
         res.status(404).json({ message: "Something went wrong!" });
         return;
       }
-      
+
       req.session.user_id = dbUserData.id;
       req.session.username = dbUserData.username;
       req.session.loggedIn = true;
@@ -93,12 +114,6 @@ router.post("/login", (req, res) => {
   });
 });
 
-router.post("/loggedIn", (req, res) => {
-  if (req.session.loggedIn) {
-    res.status(200).end();
-  }
-});
-
 router.post("/logout", (req, res) => {
   if (req.session) {
     req.session.destroy(() => {
@@ -106,6 +121,13 @@ router.post("/logout", (req, res) => {
     });
   } else {
     res.status(404).end();
+  }
+});
+
+//check if someone is logged in
+router.post("/loggedIn", (req, res) => {
+  if (req.session.loggedIn) {
+    res.status(200).end();
   }
 });
 

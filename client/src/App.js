@@ -8,8 +8,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
-import Sessions from "./pages/Sessions";
-import Signup from "./pages/Signup";
+import MainPage from "./pages/MainPage";
+import Register from "./pages/Register";
 import PrivacyTerms from "./pages/PrivacyTerms";
 import Contact from "./pages/Contact";
 import Team from "./pages/Team";
@@ -26,8 +26,8 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/calendar" element={<Sessions />} />
-        <Route path="/signup" element={<Signup />} />
+        <Route path="/calendar" element={<MainPage />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/privacyterms" element={<PrivacyTerms />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/team" element={<Team />} />

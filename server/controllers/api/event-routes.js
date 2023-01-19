@@ -6,7 +6,7 @@ router.get("/", (req, res) => {
     include: [
       {
         model: User,
-        attributes: ["username"],
+        attributes: ["first", "last"],
         through: EventUser,
         as: "event_users",
       },
@@ -66,6 +66,18 @@ router.delete("/:id", (req, res) => {
       }
       res.json(dbEventData);
     })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+});
+
+router.post("/attend", (req, res) => {
+  EventUser.create({
+    event_id: req.body.event_id,
+    user_id: req.session.user_id,
+  })
+    .then((dbEventData) => res.json(dbEventData))
     .catch((err) => {
       console.log(err);
       res.status(500).json(err);

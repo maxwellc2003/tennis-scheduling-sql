@@ -13,7 +13,6 @@ const Login = () => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-
     setStatus("Loading...");
 
     try {
@@ -77,7 +76,7 @@ const Login = () => {
             >
               Login
             </button>
-            <Link to="/signup" className="login-form-button">
+            <Link to="/register" className="login-form-button">
               Register
             </Link>
           </div>

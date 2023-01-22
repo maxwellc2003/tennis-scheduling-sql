@@ -63,7 +63,6 @@ const EventForm = () => {
 
   return (
     <div className="post-form-wrapper">
-      <h1>Add Session</h1>
       <form className="post-form" onSubmit={handleSubmit}>
         <div className="sessionEl">
           <h4>Date:</h4>

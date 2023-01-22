@@ -14,7 +14,7 @@ const CalendarEvents = (events) => {
   // pop up
   const [hidden, setHidden] = useState(true);
   const [status, setStatus] = useState("");
-  const [playersOpen, setOpenPlayers] = useState(false);
+  const [playersOpen, setPlayersOpen] = useState(false);
   const [players, setPlayers] = useState([]);
   const [popUpInfo, setPopUpInfo] = useState({
     id: "",
@@ -41,13 +41,12 @@ const CalendarEvents = (events) => {
         <button onClick={() => rsvp(popUpInfo.id)}>RSVP</button>
         <a
           href="#"
-          onClick={() => setOpenPlayers(true)}
+          onClick={() => setPlayersOpen(true)}
           className="view-players"
         >
           (View Player List)
         </a>
         {playersOpen && (
-          // console.log(players[0])
           <ul className="player-list">
             {players[0].map((player) => (
               <li key={player.id}>
@@ -327,7 +326,7 @@ const CalendarEvents = (events) => {
   }
 
   function closePopUp() {
-    setOpenPlayers(false);
+    setPlayersOpen(false);
     setHidden(true);
     setPlayers([]);
     setStatus("");

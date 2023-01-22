@@ -311,3 +311,21 @@
   padding: 0;
   list-style: none;
 }
+
+/* session styling */
+
+.close-button,
+.open-button {
+  border: 0;
+  padding: 0;
+  width: 100%;
+  font-size: large;
+  border-radius: 0 0 3px 3px;
+  background-color: var(--main-right-background-color);
+}
+
+.close-button:hover,
+.open-button:hover {
+  cursor: pointer;
+  background-color: var(--calendar-banner-color);
+}

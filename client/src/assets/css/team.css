@@ -1,5 +1,19 @@
-.coming-soon {
-    margin: auto;
-    color: white;
-    font-size: xx-large;
+.team {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
+
+.team-card {
+  padding: 25px;
+  height: auto;
+  border-radius: 10px;
+  background-color: rgb(163, 163, 163);
+}
+
+.team-card img {
+  width: 60vh;
+  border-radius: 10px;
+}
+

@@ -3,7 +3,7 @@
   padding: 15px;
   margin: 0;
   height: auto;
-  border-radius: 3px;
+  border-radius: 3px 3px 0 0;
   background-color: var(--main-right-background-color);
 }
 
@@ -46,6 +46,6 @@
   margin-left: 33px;
 }
 
-.date-selection  {
+.date-selection {
   margin-left: 65px;
 }

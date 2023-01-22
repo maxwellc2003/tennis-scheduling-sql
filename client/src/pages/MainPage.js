@@ -14,6 +14,7 @@ const Sessions = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [loggedIn, setLoggedIn] = useState(false);
+  const [addSessionOpen, setAddSessionOpen] = useState(false);
 
   useEffect(() => {
     Auth().then(setLoggedIn);
@@ -46,7 +47,25 @@ const Sessions = () => {
       <div className="main-right">
         {!loggedIn && <Login />}
         {loggedIn && <PlayerCard />}
-        {loggedIn && <SessionForm />}
+        <div>
+          {addSessionOpen && <SessionForm />}
+          {loggedIn && !addSessionOpen && (
+            <button
+              className="open-button"
+              onClick={() => setAddSessionOpen(true)}
+            >
+              Add Session
+            </button>
+          )}
+          {loggedIn && addSessionOpen && (
+            <button
+              className="close-button"
+              onClick={() => setAddSessionOpen(false)}
+            >
+              Close
+            </button>
+          )}
+        </div>
       </div>
     </main>
   );

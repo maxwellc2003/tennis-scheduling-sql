@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 import moment from "moment";
 
@@ -7,6 +7,8 @@ import routeLink from "../../utils/routeLink";
 import weekDays from "../../utils/weekDays";
 
 const CalendarEvents = (events) => {
+  const [data, setData] = useState(events.data);
+
   // calendar date usage
   const [currentDate, setCurrentDate] = useState(moment());
   const [calendarDays, setCalendarDays] = useState(weekDays(currentDate));
@@ -26,6 +28,22 @@ const CalendarEvents = (events) => {
     min: "",
     max: "",
   });
+
+  // filter
+  const [filter, setFilter] = useState(null);
+  const filterRef = useRef();
+
+  useEffect(() => {
+    if (filter) {
+      setData(data.filter((data) => data.location === filter));
+    }
+  }, [filter]);
+
+  const filterSubmit = function (e) {
+    e.preventDefault();
+
+    setFilter(filterRef.current.value);
+  };
 
   return (
     <div className="calendar">
@@ -64,36 +82,16 @@ const CalendarEvents = (events) => {
       <div className="calendar-header">
         <div className="calendar-header-left">
           <div className="dropdown">
-            <button id="dropdownBtn" className="dropbtn">
-              Jump To
+            <button
+              onClick={() => jumpDropDown()}
+              id="dropdownBtn"
+              className="dropbtn"
+            >
+              Help
             </button>
-            <div id="myDropdown" className="dropdown-content">
-              <form>
-                <label htmlFor="months">Month</label>
-                <select className="months" id="month" name="months">
-                  <option value="01">January</option>
-                  <option value="02">February</option>
-                  <option value="03">March</option>
-                  <option value="04">April</option>
-                  <option value="05">May</option>
-                  <option value="06">June</option>
-                  <option value="07">July</option>
-                  <option value="08">August</option>
-                  <option value="09">September</option>
-                  <option value="10">October</option>
-                  <option value="11">November</option>
-                  <option value="12">December</option>
-                </select>
-                <input
-                  className=""
-                  type="text"
-                  id="day"
-                  placeholder="Day (01...31)"
-                />
-                <button id="jumpToBtn" className="jumpToBtn">
-                  Go
-                </button>
-              </form>
+            <div id="myDropdown" className="help-drop dropdown-content">
+              <p>Need help?</p>
+              <p>More help options coming soon...</p>
             </div>
           </div>
         </div>
@@ -109,14 +107,25 @@ const CalendarEvents = (events) => {
         </div>
 
         <div className="dropdown2">
-          <button id="dropdownBtn2" className="dropbtn2" type="button">
+          <button
+            onClick={() => filterDropDown()}
+            id="dropdownBtn2"
+            className="dropbtn2"
+            type="button"
+          >
             Filter
           </button>
           <div id="myDropdown2" className="dropdown-content2">
-            <form>
+            <form onSubmit={filterSubmit}>
               <label htmlFor="locations">Choose a Location:</label>
-              <select name="locations" id="location"></select>
-              <button id="filterBtn" className="filterBtn">
+              <select ref={filterRef} name="locations" id="location">
+                {events.data.map((event) => (
+                  <option value={event.location} key={event.id}>
+                    {event.location}
+                  </option>
+                ))}
+              </select>
+              <button type="submit" id="filterBtn" className="filterBtn">
                 Go
               </button>
             </form>
@@ -130,7 +139,7 @@ const CalendarEvents = (events) => {
             <h3>{calendarDays[0].slice(3, 5)}</h3>
           </div>
           <div id="monContainer" className="event-container">
-            {events.data
+            {data
               .filter((data) => data.date === calendarDays[0])
               .map((event) => (
                 <div
@@ -140,7 +149,7 @@ const CalendarEvents = (events) => {
                 >
                   <p>{event.event_users.length}</p>
                   <div className="number-attending-icon"></div>
-                  <h6>{event.time.slice(0, event.time.indexOf('-'))}</h6>
+                  <h6>{event.time.slice(0, event.time.indexOf("-"))}</h6>
                 </div>
               ))}
           </div>
@@ -151,7 +160,7 @@ const CalendarEvents = (events) => {
             <h3>{calendarDays[1].slice(3, 5)}</h3>
           </div>
           <div id="tueContainer" className="event-container">
-            {events.data
+            {data
               .filter((data) => data.date === calendarDays[1])
               .map((event) => (
                 <div
@@ -161,7 +170,7 @@ const CalendarEvents = (events) => {
                 >
                   <p>{event.event_users.length}</p>
                   <div className="number-attending-icon"></div>
-                  <h6>{event.time.slice(0, event.time.indexOf('-'))}</h6>
+                  <h6>{event.time.slice(0, event.time.indexOf("-"))}</h6>
                 </div>
               ))}
           </div>
@@ -172,7 +181,7 @@ const CalendarEvents = (events) => {
             <h3>{calendarDays[2].slice(3, 5)}</h3>
           </div>
           <div id="wedContainer" className="event-container">
-            {events.data
+            {data
               .filter((data) => data.date === calendarDays[2])
               .map((event) => (
                 <div
@@ -182,7 +191,7 @@ const CalendarEvents = (events) => {
                 >
                   <p>{event.event_users.length}</p>
                   <div className="number-attending-icon"></div>
-                  <h6>{event.time.slice(0, event.time.indexOf('-'))}</h6>
+                  <h6>{event.time.slice(0, event.time.indexOf("-"))}</h6>
                 </div>
               ))}
           </div>
@@ -193,7 +202,7 @@ const CalendarEvents = (events) => {
             <h3>{calendarDays[3].slice(3, 5)}</h3>
           </div>
           <div id="thuContainer" className="event-container">
-            {events.data
+            {data
               .filter((data) => data.date === calendarDays[3])
               .map((event) => (
                 <div
@@ -203,7 +212,7 @@ const CalendarEvents = (events) => {
                 >
                   <p>{event.event_users.length}</p>
                   <div className="number-attending-icon"></div>
-                  <h6>{event.time.slice(0, event.time.indexOf('-'))}</h6>
+                  <h6>{event.time.slice(0, event.time.indexOf("-"))}</h6>
                 </div>
               ))}
           </div>
@@ -214,7 +223,7 @@ const CalendarEvents = (events) => {
             <h3>{calendarDays[4].slice(3, 5)}</h3>
           </div>
           <div id="friContainer" className="event-container">
-            {events.data
+            {data
               .filter((data) => data.date === calendarDays[4])
               .map((event) => (
                 <div
@@ -224,7 +233,7 @@ const CalendarEvents = (events) => {
                 >
                   <p>{event.event_users.length}</p>
                   <div className="number-attending-icon"></div>
-                  <h6>{event.time.slice(0, event.time.indexOf('-'))}</h6>
+                  <h6>{event.time.slice(0, event.time.indexOf("-"))}</h6>
                 </div>
               ))}
           </div>
@@ -235,7 +244,7 @@ const CalendarEvents = (events) => {
             <h3>{calendarDays[5].slice(3, 5)}</h3>
           </div>
           <div id="satContainer" className="event-container">
-            {events.data
+            {data
               .filter((data) => data.date === calendarDays[5])
               .map((event) => (
                 <div
@@ -245,7 +254,7 @@ const CalendarEvents = (events) => {
                 >
                   <p>{event.event_users.length}</p>
                   <div className="number-attending-icon"></div>
-                  <h6>{event.time.slice(0, event.time.indexOf('-'))}</h6>
+                  <h6>{event.time.slice(0, event.time.indexOf("-"))}</h6>
                 </div>
               ))}
           </div>
@@ -256,7 +265,7 @@ const CalendarEvents = (events) => {
             <h3>{calendarDays[6].slice(3, 5)}</h3>
           </div>
           <div id="sunContainer" className="event-container">
-            {events.data
+            {data
               .filter((data) => data.date === calendarDays[6])
               .map((event) => (
                 <div
@@ -266,7 +275,7 @@ const CalendarEvents = (events) => {
                 >
                   <p>{event.event_users.length}</p>
                   <div className="number-attending-icon"></div>
-                  <h6>{event.time.slice(0, event.time.indexOf('-'))}</h6>
+                  <h6>{event.time.slice(0, event.time.indexOf("-"))}</h6>
                 </div>
               ))}
           </div>
@@ -344,5 +353,17 @@ const CalendarEvents = (events) => {
     setCalendarDays(weekDays(currentDate));
   }
 };
+
+// drop downs
+
+function jumpDropDown() {
+  document.getElementById("myDropdown").classList.toggle("show");
+  document.getElementById("dropdownBtn").classList.toggle("dropbtn-focus");
+}
+
+function filterDropDown() {
+  document.getElementById("myDropdown2").classList.toggle("show2");
+  document.getElementById("dropdownBtn2").classList.toggle("dropbtn-focus2");
+}
 
 export default CalendarEvents;

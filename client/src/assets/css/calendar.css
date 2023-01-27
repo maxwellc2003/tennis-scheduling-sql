@@ -115,6 +115,8 @@
 
 /* Dropdown Content (Hidden by Default) */
 .dropdown-content {
+  color: white;
+  text-align: center;
   margin: 0px;
   display: none;
   position: absolute;
@@ -200,6 +202,8 @@
 
 /* Dropdown Content (Hidden by Default) */
 .dropdown-content2 {
+  color: white;
+  text-align: center;
   right: 0;
   margin: 0px;
   display: none;
@@ -224,7 +228,7 @@
 }
 
 .dropdown-content2 label {
-  margin: 5px;
+  padding: 5px;
 }
 
 .dropdown-content2 form {
@@ -232,7 +236,7 @@
 }
 
 .dropdown-content2 button {
-  margin: 5px;
+width: 90%;
 }
 
 /* Change color of dropdown links on hover */

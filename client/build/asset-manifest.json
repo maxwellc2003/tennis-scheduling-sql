@@ -1,22 +1,23 @@
 {
   "files": {
-    "main.css": "/static/css/main.3340020c.css",
-    "main.js": "/static/js/main.a43dbaa0.js",
+    "main.css": "/static/css/main.297f4c48.css",
+    "main.js": "/static/js/main.e42335ec.js",
     "static/js/787.f2421865.chunk.js": "/static/js/787.f2421865.chunk.js",
     "static/media/main-page-03.jpg": "/static/media/main-page-03.25bf82b8952175739949.jpg",
     "static/media/main-page-02.jpg": "/static/media/main-page-02.e77e437347898d44066e.jpg",
+    "static/media/josephballardteam.png": "/static/media/josephballardteam.bebf6c5c45fc866c2f29.png",
     "static/media/main-page-04.jpg": "/static/media/main-page-04.8f9687973196e24bdcb5.jpg",
     "static/media/main-page-05.jpg": "/static/media/main-page-05.14720d8b670b6f5926d5.jpg",
     "static/media/main-page-01.jpg": "/static/media/main-page-01.3d5d92ef454aa9e65395.jpg",
     "static/media/privacystatement.pdf": "/static/media/privacystatement.77436e63c12609afc16b.pdf",
     "static/media/banner.png": "/static/media/banner.85e81ddccce5badb4917.png",
     "index.html": "/index.html",
-    "main.3340020c.css.map": "/static/css/main.3340020c.css.map",
-    "main.a43dbaa0.js.map": "/static/js/main.a43dbaa0.js.map",
+    "main.297f4c48.css.map": "/static/css/main.297f4c48.css.map",
+    "main.e42335ec.js.map": "/static/js/main.e42335ec.js.map",
     "787.f2421865.chunk.js.map": "/static/js/787.f2421865.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.3340020c.css",
-    "static/js/main.a43dbaa0.js"
+    "static/css/main.297f4c48.css",
+    "static/js/main.e42335ec.js"
   ]
 }
